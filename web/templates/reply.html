@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Search | GEC Anon{% endblock %}
+{% block style %}
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script>
+        function onSubmitS(token) {
+            document.getElementById("formS").submit();
+        }
+    </script>
+    <style>
+            .grecaptcha-badge{
+                display: none;
+            }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+        <form action="/search/" method="post" role="form" id="formS">
+            <legend class="text-center">View status of Tip</legend>
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-md-offset-2">
+                        <div class="form-group label-floating"><label class="control-label" for="inputID">Tip Code</label>
+                            <input type="text" name="code" id="inputID" class="form-control" value="" title=""
+                                   placeholder="Tip Code" class="form-control"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <button type="submit"
+                                data-sitekey="6LflTR4UAAAAAEThp35_xZr2GV6VXjx5dJehPosn"
+                                data-callback="onSubmitS" class="g-recaptcha btn btn-primary btn-raised">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if message  %}
+        <div class="jumbotron">
+        <legend class="text-center">Response</legend>
+            <h3>{{ message }}</h3>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

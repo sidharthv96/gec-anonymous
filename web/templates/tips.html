@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Search | GEC Anon{% endblock %}
+{% block style %}
+
+{% endblock %}
+{% block navbar %}
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">GEC Anonymous</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-inverse-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/tips/">View Tips</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout/">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="well">
+                <h2>New Tips</h2>
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th>To</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in tips %}
+                        {% if not t.response %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="/tips/view?pk={{ t.pk }}">{{ t.subject }}</a></td>
+                                <td>{{ t.directed_to }}</td>
+                                <td>{{ t.submitted_on }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="well">
+
+                <h2>Responded</h2>
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th>To</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in tips %}
+                        {% if t.response %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="/tips/view?pk={{ t.pk }}">{{ t.subject }}</a></td>
+                                <td>{{ t.directed_to }}</td>
+                                <td>{{ t.submitted_on }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

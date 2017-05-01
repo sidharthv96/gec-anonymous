@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <form action="#" method="post" role="form" id="form">
+            <legend class="text-center">Login</legend>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {% bootstrap_field field form_group_class='form-group label-floating' %}
+                </div>
+            {% endfor %}
+            <br>
+            <button type="submit" class="btn btn-primary btn-raised">Login</button>
+        </form>
+    </div>
+
+{% endblock %}

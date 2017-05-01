@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Home | GEC Anon{% endblock %}
+{% block style %}
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("form").submit();
+        }
+        function onSubmitS(token) {
+            document.getElementById("formS").submit();
+        }
+    </script>
+    <style>
+    .grecaptcha-badge{
+        display: none;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+        <form action="#" method="post" role="form" id="form">
+            <legend class="text-center">Share Anonymously</legend>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {% bootstrap_field field form_group_class='form-group label-floating' %}
+                </div>
+            {% endfor %}
+            No data is saved for personal identification. The entire code is open source, and can be refered here.
+            <br>
+            <button type="submit"
+                    data-sitekey="6LflTR4UAAAAAEThp35_xZr2GV6VXjx5dJehPosn"
+                    data-callback="onSubmit" class="g-recaptcha btn btn-primary btn-raised">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

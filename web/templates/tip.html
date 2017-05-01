@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Home | GEC Anon{% endblock %}
+{% block navbar %}
+<div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">GEC Anonymous</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-inverse-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/tips/">View Tips</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout/">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+ {% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <form action="#" method="post" role="form" id="form">
+            <legend class="text-center">Reply to tip</legend>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {% bootstrap_field field form_group_class='form-group label-floating' %}
+                </div>
+            {% endfor %}
+            <br>
+            <div class="form-group">
+                    <div class="form-group label-floating"><label class="control-label" for="id_reply">Response</label><textarea name="response" rows="10" title="" required="" cols="40" id="id_reply" placeholder="Response" class="form-control" autocomplete="off">{{ response }}</textarea></div>
+                </div>
+            <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
